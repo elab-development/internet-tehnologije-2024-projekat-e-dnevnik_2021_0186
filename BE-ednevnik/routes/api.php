@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OcenaController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\RoditeljController;
 use App\Http\Controllers\UcenikController;
@@ -39,7 +40,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/profesori/dodaj-predmet', [ProfesorController::class, 'dodajPredmet']);
     Route::delete('/profesori/ukloni-predmet/{predmet_id}', [ProfesorController::class, 'ukloniPredmet']);
 
+    Route::get('/profesor/dashboard', [ProfesorController::class, 'mojDashboard']);
+    Route::get('/profesor/export-pdf', [ProfesorController::class, 'exportujDashboardPDF']);
+    Route::patch('/profesor/oceni', [OcenaController::class, 'azurirajOcenu']);
 
 
+    
+    Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
+    Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
 
 });  
