@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OcenaController;
+use App\Http\Controllers\PredmetController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\RoditeljController;
 use App\Http\Controllers\UcenikController;
@@ -17,9 +18,11 @@ Route::post('/ucenik', [UcenikController::class, 'store']);
 Route::post('/profesor', [ProfesorController::class, 'store']);
 
 //prikaz svih modela
-Route::get('/roditelji', [RoditeljController::class, 'index']);
-Route::get('/ucenici', [UcenikController::class, 'index']);
 Route::get('/profesori', [ProfesorController::class, 'index']);
+Route::get('/ucenici', [UcenikController::class, 'index']);
+Route::get('/roditelji', [RoditeljController::class, 'index']);
+Route::get('/ocene', [OcenaController::class, 'index']);
+Route::get('/predmeti', [PredmetController::class, 'index']);
 
 //zasticena grupna ruta
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -43,10 +46,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profesor/dashboard', [ProfesorController::class, 'mojDashboard']);
     Route::get('/profesor/export-pdf', [ProfesorController::class, 'exportujDashboardPDF']);
     Route::patch('/profesor/oceni', [OcenaController::class, 'azurirajOcenu']);
-
-
     
+    Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
+
+
     Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
     Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
+
+    //za admina - sta sve radi
+    Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
+    Route::resource('predmeti', PredmetController::class)->only([
+        'store', 'update', 'destroy']);
+    Route::patch('/predmeti/{id}/ukloni-profesora', [PredmetController::class, 'ukloniProfesora']);
 
 });  
