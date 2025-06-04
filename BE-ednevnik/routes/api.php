@@ -32,10 +32,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //rute za roditelja - prikaz i azuriranje profila
     Route::get('/roditelji/{id}', [RoditeljController::class, 'show']);
     Route::put('/roditelji/{id}', [RoditeljController::class, 'update']);
+    Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
 
     //rute za ucenike - prikaz i azuriranje profila
     Route::get('/ucenici/{id}', [UcenikController::class, 'show']);
     Route::put('/ucenici/{id}', [UcenikController::class, 'update']);
+    Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
 
     //za profesora - sta sve radi
     Route::get('/profesori/{id}', [ProfesorController::class, 'show']);
@@ -48,10 +50,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::patch('/profesor/oceni', [OcenaController::class, 'azurirajOcenu']);
     
     Route::get('/predmeti/dostupni', [PredmetController::class, 'dostupniPredmeti']);
-
-
-    Route::get('/ocene/moje', [OcenaController::class, 'vratiMojeOcene']);
-    Route::get('/ocene/moje-dece', [OcenaController::class, 'vratiOceneMojeDece']);
 
     //za admina - sta sve radi
     Route::get('/metrics', [PredmetController::class, 'getMetricsForAdmin']);
