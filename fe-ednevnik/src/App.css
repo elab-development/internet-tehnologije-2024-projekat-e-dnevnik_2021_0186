@@ -1,38 +1,663 @@
-.App {
-  text-align: center;
+/* Definisanje promenljivih boja */
+:root {
+    --primary-color: #2E6E65;
+    --secondary-color: #2B3752;
+    --accent-color: #86EE60;
+    --accent-color-hover:#7fbb69;
+    --text-color: #F4F7ED;
+    --black: #000;
+    --white: #fff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Resetovanje osnovnih stilova */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Opšti stil za telo stranice */
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Stil za naslove */
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-bottom: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Stil za paragraf */
+p {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Dugmad - osnovni stil */
+button {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Hover efekat za dugmad */
+button:hover {
+    background-color: var(--accent-color-hover);
+    transform: scale(1.05);
+}
+
+
+.login-form h2, .user-form h2 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.login-form input, .user-form input, .modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--accent-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: var(--white);
+    color: var(--secondary-color);
+}
+
+/* Input fokus efekat */
+.login-form input:focus, .user-form input:focus, .modal-content input:focus {
+    border-color: var(--text-color);
+    outline: none;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 6px;
+    background-color: var(--white);
+    color: var(--secondary-color);
+    appearance: none; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    border-color: var(--primary-color);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--text-color);
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+option {
+    background-color: var(--white);
+    color: var(--secondary-color);
+    font-size: 1rem;
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232B3752'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); 
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 30px; 
+}
+
+/* Stil za login stranicu */
+.login-page, .user-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 650px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-align: center;
+    padding-top: 20px;
+}
+
+
+/* Kontejner za sliku i formu u istom redu */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 1500px;
+    padding: 30px;
+    
+}
+
+/* Stil za sliku (levo) */
+.login-image {
+    width: 800px;
+    border-radius: 10px;
+    margin-right: 30px;
+    margin-top: 0px;
+}
+
+/* Stil za login formu (desno) */
+.login-form, .user-form {
+    display: flex;
+    background-color: var(--primary-color);
+    flex-direction: column;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 15px 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.nav-icon {
+    font-size: 1.8rem;
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+   
+}
+
+.nav-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+.logout-button {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    font-size: 1rem;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-top: 0px;
+}
+
+.remove-btn {
+    margin-top: 0px;
+}
+
+.logout-button:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+}
+
+.user-form {
+    margin: 50px 10px 20px 20px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content{
+    background: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.modal-content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: var(--secondary-color);
+    color:var(--text-color);
+    min-height: 650px;
+    height: 100%;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1300px;
+    min-height: 500px;
+    gap: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.profile-info {
+    flex: 4;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+.student-info {
+    margin-bottom: 20px;
+}
+
+.parent-info {
+    padding-top: 15px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+}
+
+.profile-image {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.reusable-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: var(--secondary-color);
+    opacity: 90%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.reusable-table th, .reusable-table td {
+    padding: 10px;
+    text-align: center;
+}
+
+.reusable-table th {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+.reusable-table tr:hover {
+    background-color: #43547a;
+    transition: 0.3s;
+}
+
+.profesor-profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
+    margin-top: 20px;
+    min-height: 500px;
+}
+
+.profesor-profile-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column; 
+    gap: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: 500px;
+}
+
+/* Sekcija sa tabelom predmeta */
+.subjects-section {
+    background-color: #2d3748;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    opacity: 100%;
+    margin-bottom: 20px;
+}
+
+/* Footer sekcija */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.logo svg {
+    color: var(--accent-color);
+}
+
+.footer a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.ucenik-dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    min-height: 600px;
+}
+
+.ocene-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    justify-content: space-evenly;
+}
+
+.ocena-card{
+    background: linear-gradient(135deg, #74c577, #4ba799);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    min-width: 200px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ocena-body, .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ocena-card:hover {
+    transform: scale(1.05);
+}
+
+.card-header {
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.filter-sort-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-sort-container select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 300px;
+    cursor: pointer;
+}
+
+.card-body h3{
+ color: var(--primary-color);
+ font-size: 16px;
+}
+
+.table-section {
+    margin: 10px;
+    width: 1380px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-section button {
+    margin-left: 10px;
+}
+
+.roditelj-dashboard, .admin-dashboard, .admin-subjects-page, .profesor-dashboard, .predmet-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    min-height: 500px;
+}
+
+.predmet-block h3 {
+    color: var(--accent-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.predmet-block h3:hover {
+    color: var(--accent-color-hover);
+    transform: scale(1.2);
+}
+
+.chart-section {
+    width: 1200px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 30px;
+
+}
+
+.pagination {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.add-subject-form {
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    gap:5px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+    width: 600px;
+    display: flex;
+    flex-direction: column; 
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.add-subject-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.add-subject-form input::placeholder {
+    color: #a0a0a0;
+}
+
+.add-subject-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    flex-wrap: wrap; 
+    margin-top: 0px;
+}
+
+.add-subject-image img {
+    max-width: 430px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+.ucenik-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.card.trivia-card {
+    background: linear-gradient(135deg, #74c577, #4ba799);
+    color: white;
+    margin: 0 auto 3rem auto;
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.words-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    margin-bottom: 60px;
+}
+
+.word-card {
+    background: linear-gradient(135deg, #74c577, #4ba799);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.word-card:hover, card.trivia-card:hover  {
+    transform: translateY(-5px);
+}
+
+.word-card h4 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--primary-color);
 }
