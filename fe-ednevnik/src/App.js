@@ -13,7 +13,7 @@ import UcenikHome from "./components/ucenik/UcenikHome";
 import ProfesorForm from "./components/profesor/ProfesorForm";
 import UcenikForm from "./components/ucenik/UcenikForm";
 import RoditeljForm from "./components/roditelj/RoditeljForm";
-
+import Breadcrumbs from "./components/reusable/Breadcrumbs";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -35,6 +35,7 @@ function App() {
                     setTipKorisnika={setTipKorisnika}
                     setRelatedModelId={setRelatedModelId}
                 />
+                <Breadcrumbs />
                 <Routes>
                     {/* Opšte rute za sve korisnike */}
                     
