@@ -30,7 +30,7 @@ const pathLabelMap = {
   "/predmeti-admin": "Upravljanje Predmetima",
 };
 
-// Explicitne veze roditelj → dete:
+// Explicitne veze dete --> roditelj:
 const parentMap = {
   "/profesor-profile": "/dashboard-profesor",
   "/dashboard-ucenik": "/ucenik-home",
