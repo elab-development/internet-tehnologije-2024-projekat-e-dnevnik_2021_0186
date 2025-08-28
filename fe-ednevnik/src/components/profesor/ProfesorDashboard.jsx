@@ -114,9 +114,36 @@ const ProfesorDashboard = () => {
         },
     ];
 
+    const handleExportPdf = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/api/profesor/export-pdf", {
+                responseType: "blob", // Da bi dobili fajl (PDF) kao blob
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            // Kreiranje linka za preuzimanje PDF-a
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "izvestaj_profesora.pdf"); // Naziv fajla
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            alert("Izveštaj profesora je uspešno izvozan u PDF.");
+        } catch (error) {
+            console.error("Greška pri izvozu PDF-a:", error);
+            alert("Došlo je do greške prilikom izvoza PDF izveštaja.");
+        }
+    };
+
     return (
         <div className="profesor-dashboard">
             <h2>Vaši predmeti:</h2>
+            <button onClick={handleExportPdf} className="export-btn">
+                Izvezi ceo izveštaj u PDF
+            </button>
             {loading && <p>Učitavanje...</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
 
