@@ -15,6 +15,9 @@ import UcenikForm from "./components/ucenik/UcenikForm";
 import RoditeljForm from "./components/roditelj/RoditeljForm";
 import Breadcrumbs from "./components/reusable/Breadcrumbs";
 import UcenikProfile from "./components/ucenik/UcenikProfile";
+import RoditeljProfile from "./components/roditelj/RoditeljProfile";
+import ProfesorProfile from "./components/profesor/ProfesorProfile";
+import AdminPredmeti from "./components/admin/AdminPredmeti";
 
 function App() {
     const [token, setToken] = useState(sessionStorage.getItem("access_token"));
@@ -65,12 +68,7 @@ function App() {
                     {token && tipKorisnika === "profesor" && (
                         <>
                         <Route path="/dashboard-profesor" element={<ProfesorDashboard />} />
-                        <Route path='/profesor-profile' element={
-                            <div> 
-                               <h1 style={{marginLeft:"500px", marginTop:'200px', fontWeight:"bold", fontSize:"50px"}}> ZA PROJEKAT POSLE </h1>  
-                               <img style={{height:"200px", width:"200px", marginLeft:"650px", marginBottom:"20px", marginTop:'20px'}} src="https://cdn-icons-png.flaticon.com/512/5578/5578703.png"></img>
-                            </div>
-                        } />
+                        <Route path='/profesor-profile' element={<ProfesorProfile/> } />
                         </>
                     )}
 
@@ -85,23 +83,13 @@ function App() {
                     {token && tipKorisnika === "roditelj" && (
                         <>
                         <Route path="/dashboard-roditelj" element={<RoditeljDashboard />} />
-                        <Route path="/roditelj-profile" element={
-                            <div> 
-                               <h1 style={{marginLeft:"500px", marginTop:'200px', fontWeight:"bold", fontSize:"50px"}}> ZA PROJEKAT POSLE </h1>  
-                               <img style={{height:"200px", width:"200px", marginLeft:"650px", marginBottom:"20px", marginTop:'20px'}} src="https://cdn-icons-png.flaticon.com/512/5578/5578703.png"></img>
-                            </div>
-                        } />
+                        <Route path="/roditelj-profile" element={<RoditeljProfile/> } />
                         </>
                     )}
                      {token && tipKorisnika === "admin" && (
                         <>
                         <Route path="/dashboard-admin" element={<AdminDashboard />} />
-                        <Route path="/predmeti-admin" element={
-                            <div> 
-                               <h1 style={{marginLeft:"500px", marginTop:'200px', fontWeight:"bold", fontSize:"50px"}}> ZA PROJEKAT POSLE </h1>  
-                               <img style={{height:"200px", width:"200px", marginLeft:"650px", marginBottom:"20px", marginTop:'20px'}} src="https://cdn-icons-png.flaticon.com/512/5578/5578703.png"></img>
-                            </div>
-                        } />
+                        <Route path="/predmeti-admin" element={<AdminPredmeti/> } />
                         </>
                     )}
                 </Routes>
